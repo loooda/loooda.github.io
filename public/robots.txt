@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Speed up indexing with official site configuration
+Sitemap: https://huggingface.co/spaces/looda3131/pulse-of-the-world/sitemap.xml

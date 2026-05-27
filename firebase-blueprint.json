@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User preferences and general metadata",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique identifier of the user matching Firebase Auth"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar photo URL"
+        },
+        "favoriteCategories": {
+          "type": "array",
+          "description": "List of customized news category ids preferred by the user"
+        },
+        "notificationsEnabled": {
+          "type": "boolean",
+          "description": "Whether in-app desktop notifications are turned on"
+        },
+        "selectedLanguage": {
+          "type": "string",
+          "enum": ["ar", "en"],
+          "description": "User preference language"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark"],
+          "description": "Display theme layout choice"
+        },
+        "enableLocationNews": {
+          "type": "boolean",
+          "description": "Whether to auto-detect location and filter regional news"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated epoch timestamp"
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "A notification dispatch item received by the user",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique notification item ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Multilingual title or category badge of the alert"
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed message alert text"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Friendly read-aloud time or standard iso date"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["breaking", "local", "personalized"],
+          "description": "Priority type of the message"
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether the user has read/dismissed the notification"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server-side creation timestamp for correct list order"
+        }
+      },
+      "required": ["id", "title", "message", "type", "read"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User preferences profile"
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": "NotificationItem",
+      "description": "Subcollection of alerts received or simulated for that user"
+    }
+  }
+}
