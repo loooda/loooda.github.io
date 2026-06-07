@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Speed up indexing with official site configuration
+Sitemap: https://loooda.github.io/sitemap.xml
